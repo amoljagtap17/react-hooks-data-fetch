@@ -1,5 +1,11 @@
 import React from 'react'
+import Details from '../components/Details/Details'
 
-const Details = () => <div>Details Page!</div>
+const DetailsPage = () => (
+  <div>
+    <p>Details Page!</p>
+    <Details />
+  </div>
+)
 
-export default Details
+export default DetailsPage
