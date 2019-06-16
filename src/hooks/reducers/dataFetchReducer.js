@@ -1,22 +1,22 @@
 import { FETCH_DATA_INIT, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from './actionTypes'
 import produce from 'immer'
 
-const fetchDataInit = (draft, action) => {
-  draft.isLoading = true
-  draft.errorMessage = ''
+const fetchDataInit = (draft, { apiEndPoint }) => {
+  draft[apiEndPoint].isLoading = true
+  draft[apiEndPoint].errorMessage = ''
   return draft
 }
 
-const fetchDataSuccess = (draft, action) => {
-  draft.isLoading = false
-  draft.errorMessage = ''
-  draft.data = action.payload
+const fetchDataSuccess = (draft, { apiEndPoint, payload }) => {
+  draft[apiEndPoint].isLoading = false
+  draft[apiEndPoint].errorMessage = ''
+  draft[apiEndPoint].data = payload
   return draft
 }
 
-const fetchDataFailure = (draft, action) => {
-  draft.isLoading = false
-  draft.errorMessage = 'Data Retrieve Failure'
+const fetchDataFailure = (draft, { apiEndPoint }) => {
+  draft[apiEndPoint].isLoading = false
+  draft[apiEndPoint].errorMessage = 'Data Retrieve Failure'
   return draft
 }
 

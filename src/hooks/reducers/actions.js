@@ -1,16 +1,19 @@
 import { FETCH_DATA_INIT, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from './actionTypes'
 
-const fetchDataInit = () => ({
-  type: FETCH_DATA_INIT
+const fetchDataInit = apiEndPoint => ({
+  type: FETCH_DATA_INIT,
+  apiEndPoint
 })
 
-const fetchDataSuccess = data => ({
+const fetchDataSuccess = (apiEndPoint, data) => ({
   type: FETCH_DATA_SUCCESS,
+  apiEndPoint,
   payload: data
 })
 
-const fetchDataFailure = () => ({
-  type: FETCH_DATA_FAILURE
+const fetchDataFailure = apiEndPoint => ({
+  type: FETCH_DATA_FAILURE,
+  apiEndPoint
 })
 
 export {

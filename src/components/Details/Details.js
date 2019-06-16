@@ -1,12 +1,11 @@
-import React, { useContext } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { DataFetchContext } from '../../hooks/contexts/DataFetchContext'
+import { API_ENDPOINT_1, API_ENDPOINT_2 } from '../../core/utils/constants'
 
 const Details = () => {
   const [state] = useContext(DataFetchContext)
 
-  const { isLoading, errorMessage, data } = state
-
-  const renderPostsList = () => (
+  const renderPostsList = data => (
     <ul>
       {
         data.map(post => (
@@ -18,18 +17,30 @@ const Details = () => {
     </ul>
   )
 
-  return (
-    <div className="grid-x grid-margin-x">
-      <div className="cell">
-        {isLoading && <h1>Data is Loading!!</h1>}
-        {errorMessage.length > 0 && <h1>{errorMessage}</h1>}
-        {
-          !isLoading && !(errorMessage.length > 0) && (
-            renderPostsList()
-          )
-        }
+  const renderDetails = state => {
+    const { isLoading, errorMessage, data } = state
+
+    return (
+      <div className="grid-x grid-margin-x">
+        <div className="cell">
+          {isLoading && <h1>Data is Loading!!</h1>}
+          {errorMessage.length > 0 && <h1>{errorMessage}</h1>}
+          {
+            !isLoading && !(errorMessage.length > 0) && (
+              renderPostsList(data)
+            )
+          }
+        </div>
       </div>
-    </div>
+    )
+  }
+
+  return (
+    <Fragment>
+      {renderDetails(state[API_ENDPOINT_1])}
+      <hr />
+      {renderDetails(state[API_ENDPOINT_2])}
+    </Fragment>
   )
 }
 

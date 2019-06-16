@@ -1,30 +1,30 @@
-import { useState, useEffect, useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 import dataFetchReducer from '../reducers/dataFetchReducer'
 import jsonPlaceHolderAPI from '../../core/apis/jsonplaceholder'
 import { fetchDataInit, fetchDataSuccess, fetchDataFailure } from '../reducers/actions'
+import { API_ENDPOINT_1, API_ENDPOINT_2 } from '../../core/utils/constants'
 
-const useDataFromAPI = (intialUrl, initialData) => {
-  const [url, setUrl] = useState(intialUrl)
-
+const useDataFromAPI = initialData => {
   const [state, dispatch] = useReducer(dataFetchReducer, initialData)
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataForAPIEndpoint = async (apiEndPoint, url) => {
       try {
-        dispatch(fetchDataInit())
+        dispatch(fetchDataInit(apiEndPoint))
 
         const response = await jsonPlaceHolderAPI.get(url)
 
-        dispatch(fetchDataSuccess(response.data.slice(5)))
+        dispatch(fetchDataSuccess(apiEndPoint, response.data.slice(5)))
       } catch (err) {
-        dispatch(fetchDataFailure())
+        dispatch(fetchDataFailure(apiEndPoint))
       }
     }
 
-    fetchData()
-  }, [url])
+    fetchDataForAPIEndpoint(API_ENDPOINT_1, '/posts?userId=1')
+    fetchDataForAPIEndpoint(API_ENDPOINT_2, '/posts?userId=2')
+  }, [])
 
-  return [state, setUrl]
+  return [state]
 }
 
 export {
