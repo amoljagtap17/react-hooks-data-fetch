@@ -1,14 +1,11 @@
 import React from 'react'
 import Summary from '../components/Summary/Summary'
-import DataFetchContextProvider from '../hooks/contexts/DataFetchContext'
 
 const Home = () => (
-  <DataFetchContextProvider>
-    <div>
-      Home Page!
-      <Summary />
-    </div>
-  </DataFetchContextProvider>
+  <div>
+    <p>Home Page!</p>
+    <Summary />
+  </div>
 )
 
 export default Home

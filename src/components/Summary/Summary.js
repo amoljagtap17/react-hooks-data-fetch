@@ -1,25 +1,8 @@
-import React, { useEffect, useContext } from 'react'
-import jsonPlaceHolderAPI from '../../core/apis/jsonplaceholder'
+import React, { useContext } from 'react'
 import { DataFetchContext } from '../../hooks/contexts/DataFetchContext'
-import { fetchDataInit, fetchDataSuccess, fetchDataFailure } from '../../hooks/reducers/actions'
 
 const Summary = () => {
-  const [state, dispatch] = useContext(DataFetchContext)
-
-  useEffect(() => {
-    const fetchDataForUser1 = async () => {
-      try {
-        dispatch(fetchDataInit())
-
-        const response = await jsonPlaceHolderAPI.get('/posts?userId=1')
-        dispatch(fetchDataSuccess(response.data))
-      } catch (err) {
-        dispatch(fetchDataFailure())
-      }
-    }
-
-    fetchDataForUser1()
-  }, [dispatch])
+  const [state] = useContext(DataFetchContext)
 
   const { isLoading, errorMessage, data } = state
 
