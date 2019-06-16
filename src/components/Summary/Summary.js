@@ -3,7 +3,6 @@ import { DataFetchContext } from '../../hooks/contexts/DataFetchContext'
 
 const Summary = () => {
   const [state] = useContext(DataFetchContext)
-
   const { isLoading, errorMessage, data } = state
 
   return (
