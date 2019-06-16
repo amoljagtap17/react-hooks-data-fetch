@@ -1,10 +1,11 @@
 import React from 'react'
-import Summary from '../components/Summary/Summary'
+import ResponseData from '../components/ResponseData/ResponseData'
+import { VIEW_SUMMARY } from '../core/utils/constants'
 
 const Home = () => (
   <div>
     <p>Home Page!</p>
-    <Summary />
+    <ResponseData view={VIEW_SUMMARY} />
   </div>
 )
 

@@ -1,7 +1,5 @@
-import React, { createContext, useReducer, useEffect } from 'react'
-import dataFetchReducer from '../reducers/dataFetchReducer'
-import jsonPlaceHolderAPI from '../../core/apis/jsonplaceholder'
-import { fetchDataInit, fetchDataSuccess, fetchDataFailure } from '../reducers/actions'
+import React, { createContext } from 'react'
+import { useDataFromAPI } from '../custom/useDataFromAPI'
 
 export const DataFetchContext = createContext()
 
@@ -12,22 +10,7 @@ const DataFetchContextProvider = ({ children }) => {
     data: []
   }
 
-  const [state, dispatch] = useReducer(dataFetchReducer, initialState)
-
-  useEffect(() => {
-    const fetchDataForUser1 = async () => {
-      try {
-        dispatch(fetchDataInit())
-
-        const response = await jsonPlaceHolderAPI.get('/posts?userId=1')
-        dispatch(fetchDataSuccess(response.data))
-      } catch (err) {
-        dispatch(fetchDataFailure())
-      }
-    }
-
-    fetchDataForUser1()
-  }, [dispatch])
+  const [state] = useDataFromAPI('/posts?userId=1', initialState)
 
   return (
     <DataFetchContext.Provider value={[state]}>

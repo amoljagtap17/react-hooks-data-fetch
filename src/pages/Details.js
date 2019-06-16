@@ -1,10 +1,11 @@
 import React from 'react'
-import Details from '../components/Details/Details'
+import ResponseData from '../components/ResponseData/ResponseData'
+import { VIEW_DETAILS } from '../core/utils/constants'
 
 const DetailsPage = () => (
   <div>
     <p>Details Page!</p>
-    <Details />
+    <ResponseData view={VIEW_DETAILS} />
   </div>
 )
 
