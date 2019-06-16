@@ -15,7 +15,7 @@ const useDataFromAPI = (intialUrl, initialData) => {
 
         const response = await jsonPlaceHolderAPI.get(url)
 
-        dispatch(fetchDataSuccess(response.data))
+        dispatch(fetchDataSuccess(response.data.slice(5)))
       } catch (err) {
         dispatch(fetchDataFailure())
       }
